@@ -5,6 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A Thousand Faces of Adventure</title>
   <link rel="stylesheet" href="styles.css" />
+  <script>
+  (function () {
+    document.querySelectorAll('.cover-card').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width;   // 0–1
+        var y = (e.clientY - rect.top)  / rect.height;  // 0–1
+        var rotY =  (x - 0.5) * 22;   // –11deg … +11deg
+        var rotX = -(y - 0.5) * 16;   // –8deg  … +8deg
+        card.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) scale(1.03)';
+        // Shift the foil shimmer with the mouse
+        var shimX = Math.round(x * 100);
+        var shimY = Math.round(y * 100);
+        card.style.setProperty('--shim-x', shimX + '%');
+        card.style.setProperty('--shim-y', shimY + '%');
+        card.querySelector('::after'); // trigger repaint
+        card.style.cssText += '; --shim-pos: ' + shimX + '% ' + shimY + '%;';
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+      });
+    });
+  })();
+</script>
 </head>
 <body>
 
@@ -21,9 +45,11 @@
         <li>
           <a href="faq.html">FAQ</a>
         </li>
+        <!--
         <li>
           <a href="examples.html">Examples</a>
         </li>
+        -->
       </ul>
     </nav>
   </header>
@@ -31,7 +57,13 @@
   <!-- ======================================================
        MAIN CONTENT (ContentHome.vue)
   ======================================================= -->
+
   <main>
+
+  <section class="hero-logo">
+  <img src="assets/images/logo.svg" alt="A Thousand Faces of Adventure"
+  class="hero-logo__img" />
+  </section>
 
     <!-- Hero: title + card fan -->
     <article class="grid justify-items-center" style="display:grid; justify-items:center;">
@@ -54,22 +86,24 @@
 
       <p class="max-w-2xl px-4">
         A Thousand Faces of Adventure is a narrative board game about gathering at
-        a table with your friends and creating an improvisational story, where one
-        of you plays the GM, who has narrative authority over the world and
-        events, and the rest of you play characters being challenged by and
-        exploring this world, even creating parts of it!
+        a table with your friends and creating an improvisational story. One
+        of you is the GM, who has narrative authority over the world and
+        events, and the rest of the table play characters exploring a new world
+        and meeting its challenges!
       </p>
       <br />
       <p class="max-w-2xl px-4">
-        The players' goal is to
-        <strong>build their characters from scrappy adventurers into heroes with the
-        courage to trigger world-saving change</strong>, while the GM earns points by
+        The players will
+        <strong>build their characters from scrappy adventurers into world-changing
+        heroes</strong>, while the GM earns points by
         <strong>walking the story through each step of The Hero's Journey</strong>.
       </p>
 
+      <!--
       <a href="examples.html" class="btn btn-primary btn-block">
         Check out the examples
       </a>
+      -->
     </article>
 
     <!-- Blockquote section 1: RPG that's a board game -->
@@ -95,14 +129,20 @@
       </p>
 
       <div class="cover-grid">
-        <div>
-          <img src="assets/images/cover-art/cover_jeremy_1200x1600.jpg" alt="1kfa cover" />
+        <div class="cover-card">
+          <a href="downloads.html">
+            <img src="assets/images/cover-art/cover_jeremy_1200x1600.jpg" alt="1kfa cover" />
+          </a>
         </div>
-        <div>
-          <img src="assets/images/cover-art/cover_ana_wordmark.jpg" alt="1kfa cover" />
+        <div class="cover-card">
+          <a href="downloads.html">
+            <img src="assets/images/cover-art/cover_ana_wordmark.jpg" alt="1kfa cover" />
+          </a>
         </div>
-        <div>
-          <img src="assets/images/cover-art/cover_brandon_1200x1600.jpg" alt="1kfa cover" />
+        <div class="cover-card">
+          <a href="downloads.html">
+            <img src="assets/images/cover-art/cover_brandon_1200x1600.jpg" alt="1kfa cover" />
+          </a>
         </div>
       </div>
     </article>
@@ -180,7 +220,7 @@
     </article>
 
     <article class="footer-social">
-      <h3>Stay tuned</h3>
+      <h3>Keep track of updates:</h3>
       <ul>
         <li>
           <a href="https://github.com/sjbrown/1kfa" target="_blank" aria-label="social icon github">
@@ -189,24 +229,14 @@
             </svg>
           </a>
         </li>
-        <li>
-          <a href="https://boardcrafting.wordpress.com/subscribe/" target="_blank" aria-label="social icon rss">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 11a9 9 0 0 1 9 9"></path>
-              <path d="M4 4a16 16 0 0 1 16 16"></path>
-              <circle cx="5" cy="19" r="1"></circle>
-            </svg>
-          </a>
-        </li>
-        <li>
-          <a href="https://twitter.com/boardcrafting" target="_blank" aria-label="social icon twitter">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-            </svg>
-          </a>
-        </li>
+<li>
+  <a href="https://1kfa.substack.com" target="_blank" aria-label="Substack newsletter">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+    </svg>
+  </a>
+</li>
       </ul>
-      <p>1kfa @2020</p>
     </article>
   </footer>
 
@@ -224,19 +254,19 @@
 
         if (window.innerWidth < 450) {
           if (rect.bottom > 1100) {
-            blueCard.style.transform = 'translate(0, -2rem)';
-            redCard.style.transform  = 'translate(0, -1rem)';
+            blueCard.style.transform = 'translate(0, 0)';
+            redCard.style.transform  = 'translate(0, 0)';
           } else if (rect.bottom < 790) {
-            blueCard.style.transform = 'translate(2rem, -2rem) rotate(10deg)';
-            redCard.style.transform  = 'translate(2rem, -1rem) rotate(20deg)';
+            blueCard.style.transform = 'translate(2rem, 0) rotate(10deg)';
+            redCard.style.transform  = 'translate(4rem, 0) rotate(20deg)';
           }
         } else if (window.innerWidth > 650) {
           if (rect.bottom > 600) {
-            blueCard.style.transform = 'translate(0, -2rem)';
-            redCard.style.transform  = 'translate(0, -1rem)';
+            blueCard.style.transform = 'translate(0, 0)';
+            redCard.style.transform  = 'translate(0, 0)';
           } else if (rect.bottom < 855) {
-            blueCard.style.transform = 'translate(2rem, -2rem) rotate(10deg)';
-            redCard.style.transform  = 'translate(2rem, -1rem) rotate(24deg)';
+            blueCard.style.transform = 'translate(2rem, 0) rotate(10deg)';
+            redCard.style.transform  = 'translate(4rem, 0) rotate(24deg)';
           }
         }
       }
