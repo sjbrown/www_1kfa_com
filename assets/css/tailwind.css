@@ -1,0 +1,25 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  h1 {
+    @apply text-4xl;
+    font-family: 'Tinos';
+  }
+
+  h2 {
+    @apply text-3xl;
+    font-family: 'Tinos';
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  p {
+    @apply leading-7;
+    @apply text-gray-800;
+  }
+
+}
