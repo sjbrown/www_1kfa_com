@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "www-1kfa-com",
+  "compatibility_date": "2026-05-06",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "public_html"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
