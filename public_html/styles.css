@@ -736,9 +736,9 @@ code {
 }
 
 /* ------------------------------------------------------------
-   Downloads - Deckahedron app section
+   Downloads - App section
    ------------------------------------------------------------ */
-.deckahedron-screenshot {
+.app-screenshot {
   display: block;
   border-radius: 1rem;
   overflow: hidden;
@@ -747,17 +747,17 @@ code {
   max-width: 16rem;
 }
 
-.deckahedron-screenshot:hover {
+.app-screenshot:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 40px rgba(0,0,0,0.45);
 }
 
-.deckahedron-screenshot img {
+.app-screenshot img {
   display: block;
   width: 100%;
 }
 
-.deckahedron-desc {
+.app-desc {
   max-width: 20rem;
   text-align: center;
   margin-bottom: 1rem;
